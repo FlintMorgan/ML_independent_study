@@ -16,24 +16,25 @@ Xtilde = [ones(1,n); X];
 theta = zeros(d+1,1); % Initialize starting point to zero
 t = 0; % Iteration counter
 theta_old = ones(d+1,1);
-while (norm(theta-theta_old)/norm(theta_old)>eps)
+while (norm(theta-theta_old)/norm(theta_old)>0.01)
     
     theta_old = theta;
     
     g = 1./(1+exp(-Xtilde'*theta_old)); 
         
-    G = Xtilde*(Y-1-g);
+    G = Xtilde*(Y'-g);
 
     %how to do this per thing
-    disp(size(g))
-    disp(size(Xtilde(1)*Xtilde.'))
-    Xtilde(1)*Xtilde.'*g
-    H = zeros(size(Xtilde(1)*Xtilde.'*g*(1-g)));
-    for xi = Xtilde
-        H = H+xi*Xtilde.'*g*(1-g);
-    end
-    H = -H;
-    theta = theta_old - inv(H)*G;
+%     H = zeros(size(Xtilde(:,1)*(Xtilde*(g.*(1-g)))'));
+%     for xi = Xtilde
+%         i = i+1;
+%         H = H+xi*(Xtilde*(g.*(1-g)))';
+%     end
+%     H = -H;
+
+    H = -Xtilde*(Xtilde*diag(g.*(1-g)))';
+
+    theta = theta_old - H\G;
     
     t = t+1;
     % Update other stopping criteria?

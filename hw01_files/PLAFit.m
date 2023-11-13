@@ -17,12 +17,13 @@ Y = 2*Y-1; % Convert labels from 0,1 to -1,+1
 
 theta = zeros(d+1,1); % Initialize starting point to zero
 t = 0; % Iteration counter
-max_t = length(Y)*10;
+max_t = length(Y)*100;
 theta_old = ones(d+1,1);
-while (norm(theta-theta_old)/norm(theta_old)>eps && t<max_t)
+% while (norm(theta-theta_old)/norm(theta_old)>eps && t<max_t)
+while (t < max_t)
     idx = randi([1,length(Y)]);
     yi = Y(idx);
-    Xtildei = Xtilde(idx);
+    Xtildei = Xtilde(:,idx);
     
     theta_old = theta;
     

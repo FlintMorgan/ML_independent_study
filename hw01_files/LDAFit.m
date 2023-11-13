@@ -20,10 +20,10 @@ n1 = length(idx1); % number of training vectors labeled 1
 pi_hat_0 = n0/n;
 pi_hat_1 = n1/n;
 
-mu_hat_0 = (1/n0)*sum(X([idx0]));
-mu_hat_1 = (1/n1)*sum(X([idx1]));
+mu_hat_0 = (1/n0)*sum(X(:,idx0),2);
+mu_hat_1 = (1/n1)*sum(X(:,idx1),2);
 
-Sigma_hat = (1/n)*(sum( (X-mu_hat_0)*(X-mu_hat_0).' ));
+Sigma_hat = (1/n)*(( (X(:,idx0)-mu_hat_0)*(X(:,idx0)-mu_hat_0).' )+( (X(:,idx1)-mu_hat_1)*(X(:,idx1)-mu_hat_1).' ));
 
 w = pinv(Sigma_hat)*(mu_hat_1-mu_hat_0);
 b = 0.5*(mu_hat_0.'*pinv(Sigma_hat)*mu_hat_0)-0.5*(mu_hat_1.'*pinv(Sigma_hat)*mu_hat_1)+log(pi_hat_1/pi_hat_0);
