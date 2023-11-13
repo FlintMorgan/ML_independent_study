@@ -11,9 +11,9 @@ length(b)
 plotLinearClassifier(X,Y,w,b,1,221);
 title('LDA')
 
-%[w,b] = LRFit(X,Y);
-%plotLinearClassifier(X,Y,w,b,1,222);
-%title('Logistic regression')
+[w,b] = LRFit(X,Y);
+plotLinearClassifier(X,Y,w,b,1,222);
+title('Logistic regression')
 
 [w,b] = PLAFit(X,Y);
 plotLinearClassifier(X,Y,w,b,1,223);

@@ -23,8 +23,13 @@ while (norm(theta-theta_old)/norm(theta_old)>eps)
     g = 1./(1+exp(-Xtilde'*theta_old)); 
         
     G = Xtilde*(Y-1-g);
-    H = ???g*(1-g)
-    
+
+    %how to do this per thing
+    H = zeros(size(Xtilde(1)*Xtilde.'*g*(1-g)));
+    for xi = Xtilde
+        H = H+xi*Xtilde.'*g*(1-g);
+    end
+    H = -H;
     theta = theta_old - inv(H)*G;
     
     t = t+1;
